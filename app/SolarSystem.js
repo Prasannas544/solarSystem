@@ -8,6 +8,7 @@ import { Popover } from "./components/Popover";
 import { Sun } from "./components/three/Sun";
 import { Planet } from "./components/three/Planet";
 import { Orbit } from "./components/Orbit";
+import { SpaceScene } from "./components/space/SpaceScene";
 
 export default function SolarSystem() {
   const [selectedPlanet, setSelectedPlanet] = useState(null);
@@ -25,17 +26,9 @@ export default function SolarSystem() {
 
   return (
     <div className="fullscreen-container">
-      <Canvas camera={{ position: [0, 30, 40], fov: 45 }}>
-        <color attach="background" args={["#020207"]} />
-        <Stars
-          radius={300}
-          depth={60}
-          count={10000}
-          factor={7}
-          fade
-          speed={0.5}
-        />
+      <SpaceScene>
 
+        <color attach="background" args={["#020207"]} />
         <ambientLight intensity={0.15} />
         <directionalLight
           position={[10, 10, 5]}
@@ -63,7 +56,7 @@ export default function SolarSystem() {
           minDistance={15}
           maxDistance={150}
         />
-      </Canvas>
+        </SpaceScene>
 
       <Popover planet={selectedPlanet} onClose={closePopover} />
 
