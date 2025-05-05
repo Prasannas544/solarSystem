@@ -83,11 +83,15 @@ export const Popover = ({ planet, onClose }) => {
           align-items: center;
           z-index: 1000;
           backdrop-filter: blur(2px);
+          padding: 20px;
+          box-sizing: border-box;
         }
         
         .popover-container {
-          width: 85vw;
-          height: 75vh;
+          width: 100%;
+          max-width: 1200px;
+          height: auto;
+          max-height: 90vh;
           background: linear-gradient(135deg, rgba(10,25,60,0.5) 0%, rgba(5,15,40,0.3) 100%);
           border-radius: 4px;
           padding: 2px;
@@ -116,31 +120,34 @@ export const Popover = ({ planet, onClose }) => {
         
         .popover-content {
           display: flex;
-          height: calc(100% - 4px);
+          flex-direction: column;
+          height: auto;
           margin: 2px;
           background: rgba(5, 10, 30, 0.6);
         }
         
         .popover-threejs {
-          width: 55%;
-          height: 100%;
-          border-right: 1px solid rgba(0, 180, 255, 0.2);
+          width: 100%;
+          height: 300px;
+          border-bottom: 1px solid rgba(0, 180, 255, 0.2);
         }
         
         .popover-info {
-          width: 45%;
+          width: 100%;
           padding: 20px;
           color: #e0f0ff;
           font-family: 'Courier New', monospace;
           display: flex;
           flex-direction: column;
+          overflow-y: auto;
+          max-height: calc(90vh - 300px - 60px);
         }
         
         .info-header {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          margin-bottom: 30px;
+          margin-bottom: 20px;
           padding-bottom: 10px;
           border-bottom: 1px solid rgba(0, 180, 255, 0.3);
         }
@@ -148,7 +155,7 @@ export const Popover = ({ planet, onClose }) => {
         .planet-name {
           margin: 0;
           color: #4af;
-          font-size: 2rem;
+          font-size: 1.5rem;
           text-transform: uppercase;
           letter-spacing: 2px;
           text-shadow: 0 0 10px rgba(0, 180, 255, 0.5);
@@ -157,18 +164,18 @@ export const Popover = ({ planet, onClose }) => {
         .planet-status {
           display: flex;
           align-items: center;
-          font-size: 0.8rem;
+          font-size: 0.7rem;
           color: #0f0;
           letter-spacing: 1px;
         }
         
         .status-indicator {
           display: inline-block;
-          width: 8px;
-          height: 8px;
+          width: 6px;
+          height: 6px;
           background: #0f0;
           border-radius: 50%;
-          margin-right: 8px;
+          margin-right: 6px;
           box-shadow: 0 0 5px #0f0;
           animation: pulse 1.5s infinite;
         }
@@ -176,8 +183,8 @@ export const Popover = ({ planet, onClose }) => {
         .info-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 15px;
-          margin-bottom: 25px;
+          gap: 10px;
+          margin-bottom: 15px;
         }
         
         .grid-item {
@@ -186,18 +193,18 @@ export const Popover = ({ planet, onClose }) => {
         }
         
         .grid-label {
-          font-size: 0.7rem;
+          font-size: 0.6rem;
           color: #8af;
           text-transform: uppercase;
           letter-spacing: 1px;
-          margin-bottom: 3px;
+          margin-bottom: 2px;
         }
         
         .grid-value {
-          font-size: 1rem;
+          font-size: 0.9rem;
           color: #fff;
           background: rgba(0, 50, 100, 0.3);
-          padding: 5px 10px;
+          padding: 4px 8px;
           border-left: 2px solid #4af;
         }
         
@@ -208,7 +215,7 @@ export const Popover = ({ planet, onClose }) => {
         }
         
         .planet-description {
-          font-size: 0.9rem;
+          font-size: 0.8rem;
           line-height: 1.5;
           color: #c0e0ff;
           margin: 0;
@@ -216,16 +223,16 @@ export const Popover = ({ planet, onClose }) => {
         
         .close-button {
           position: absolute;
-          bottom: 25px;
-          right: 25px;
+          bottom: 15px;
+          right: 15px;
           background: rgba(200, 50, 50, 0.2);
           border: 1px solid rgba(255, 50, 50, 0.5);
           color: #f44;
-          font-size: 1rem;
+          font-size: 0.9rem;
           cursor: pointer;
           display: flex;
           align-items: center;
-          padding: 5px 10px;
+          padding: 4px 8px;
           transition: all 0.3s;
           z-index: 10;
         }
@@ -236,20 +243,20 @@ export const Popover = ({ planet, onClose }) => {
         }
         
         .close-icon {
-          margin-right: 8px;
-          font-size: 1.2rem;
+          margin-right: 6px;
+          font-size: 1rem;
         }
         
         .close-text {
-          font-size: 0.7rem;
+          font-size: 0.6rem;
           text-transform: uppercase;
           letter-spacing: 1px;
         }
         
         .corner-decor {
           position: absolute;
-          width: 20px;
-          height: 20px;
+          width: 15px;
+          height: 15px;
           border-color: #4af;
           border-style: solid;
           border-width: 0;
@@ -304,7 +311,7 @@ export const Popover = ({ planet, onClose }) => {
         
         /* Custom scrollbar */
         .info-scroll::-webkit-scrollbar {
-          width: 4px;
+          width: 3px;
         }
         
         .info-scroll::-webkit-scrollbar-track {
@@ -314,6 +321,83 @@ export const Popover = ({ planet, onClose }) => {
         .info-scroll::-webkit-scrollbar-thumb {
           background: rgba(0, 180, 255, 0.5);
           border-radius: 2px;
+        }
+        
+        /* Desktop styles */
+        @media (min-width: 768px) {
+          .popover-container {
+            height: 75vh;
+            max-height: none;
+          }
+          
+          .popover-content {
+            flex-direction: row;
+            height: calc(100% - 4px);
+          }
+          
+          .popover-threejs {
+            width: 55%;
+            height: 100%;
+            border-right: 1px solid rgba(0, 180, 255, 0.2);
+            border-bottom: none;
+          }
+          
+          .popover-info {
+            width: 45%;
+            max-height: none;
+          }
+          
+          .planet-name {
+            font-size: 2rem;
+          }
+          
+          .planet-status {
+            font-size: 0.8rem;
+          }
+          
+          .status-indicator {
+            width: 8px;
+            height: 8px;
+            margin-right: 8px;
+          }
+          
+          .info-grid {
+            gap: 15px;
+            margin-bottom: 25px;
+          }
+          
+          .grid-label {
+            font-size: 0.7rem;
+          }
+          
+          .grid-value {
+            font-size: 1rem;
+            padding: 5px 10px;
+          }
+          
+          .planet-description {
+            font-size: 0.9rem;
+          }
+          
+          .close-button {
+            bottom: 25px;
+            right: 25px;
+            padding: 5px 10px;
+          }
+          
+          .close-icon {
+            font-size: 1.2rem;
+            margin-right: 8px;
+          }
+          
+          .close-text {
+            font-size: 0.7rem;
+          }
+          
+          .corner-decor {
+            width: 20px;
+            height: 20px;
+          }
         }
       `}</style>
     </div>

@@ -24,7 +24,7 @@ export default function Home() {
       <button
         style={{
           position: "absolute",
-          bottom: "50px",
+          top: "50px",
           right: "50px",
           padding: "12px 24px 12px 16px",
           borderRadius: "4px",
