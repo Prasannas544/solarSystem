@@ -1,8 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
-import { useThree } from '@react-three/fiber';
-import * as THREE from 'three'; // Add this import
+import { useState, useEffect, useRef } from "react";
+import { useThree } from "@react-three/fiber";
+import * as THREE from "three"; // Add this import
+import { useAudioPlayer } from "../AudioPlayer";
 
-export const SpaceAudio = ({ audioPath = '/space.mp3' }) => {
+export const SpaceAudio = ({ audioPath = "/space.mp3" }) => {
   const [audioPlaying, setAudioPlaying] = useState(false);
   const audioRef = useRef(null);
   const { camera } = useThree();
@@ -11,11 +12,10 @@ export const SpaceAudio = ({ audioPath = '/space.mp3' }) => {
     // Create audio listener and attach to camera
     const listener = new THREE.AudioListener();
     camera.add(listener);
-
     // Create audio object
     audioRef.current = new THREE.Audio(listener);
     const audioLoader = new THREE.AudioLoader();
-    
+
     audioLoader.load(audioPath, (buffer) => {
       audioRef.current.setBuffer(buffer);
       audioRef.current.setLoop(true);
@@ -27,6 +27,7 @@ export const SpaceAudio = ({ audioPath = '/space.mp3' }) => {
         audioRef.current.stop();
         camera.remove(listener);
       }
+      stop();
     };
   }, [audioPath, camera]);
 
@@ -34,7 +35,9 @@ export const SpaceAudio = ({ audioPath = '/space.mp3' }) => {
     if (audioPlaying) {
       audioRef.current.pause();
     } else {
-      audioRef.current.play().catch(e => console.log("Audio play failed:", e));
+      audioRef.current
+        .play()
+        .catch((e) => console.log("Audio play failed:", e));
     }
     setAudioPlaying(!audioPlaying);
   };
